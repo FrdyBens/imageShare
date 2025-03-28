@@ -1,1 +1,2 @@
-
+cd image-share-app
+npm install sharp
