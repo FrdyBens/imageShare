@@ -1,1 +1,468 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+body {
+    background-color: #121212;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 110px;
+    background-color: #1a1a1a;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #333;
+}
+
+.logo {
+    padding: 10px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.logo i {
+    margin-right: 8px;
+    color: #9b59b6;
+}
+
+.nav-item {
+    padding: 12px;
+    margin: 5px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+}
+
+.nav-item i {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.nav-item:hover {
+    background-color: #2a2a2a;
+}
+
+.active {
+    background-color: #2a2a2a;
+}
+
+/* Removed profile image placeholder that needs server */
+.profile {
+    margin-top: auto;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #444; /* Placeholder background */
+    margin-left: auto;
+     margin-right: auto;
+}
+ .profile i { /* Simple icon placeholder */
+    color: #888;
+    font-size: 18px;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #333;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 10px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #2a2a2a;
+    border-radius: 20px;
+    padding: 8px 15px;
+    width: 300px;
+    max-width: 100%; /* Responsive */
+}
+
+.search-bar i {
+    margin-right: 10px;
+    color: #777;
+}
+
+.search-bar input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    width: 100%;
+}
+
+.category-tags {
+    display: flex;
+    overflow-x: auto;
+    padding: 0 5px; /* Adjust padding */
+    flex-grow: 1; /* Allow tags to take space */
+    min-width: 200px; /* Prevent shrinking too much */
+}
+ /* Hide scrollbar */
+.category-tags::-webkit-scrollbar { display: none; }
+.category-tags { -ms-overflow-style: none; scrollbar-width: none; }
+
+
+.category {
+    padding: 5px 15px;
+    background-color: #2a2a2a;
+    margin: 0 5px;
+    border-radius: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 13px; /* Slightly smaller */
+}
+
+.category.active {
+    background-color: #9b59b6;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px; /* Use gap for spacing */
+}
+
+.header-buttons button {
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    /* margin-left: 10px; No needed with gap */
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Gallery Grid */
+.gallery {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly smaller min size */
+    grid-auto-rows: 250px;
+    grid-gap: 15px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s;
+     background-color: #2a2a2a; /* Background while loading */
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+}
+
+.gallery-item:hover .image-details {
+    opacity: 1;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block; /* Prevent extra space below image */
+}
+
+.image-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 15px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none; /* Allow clicks through to image if needed */
+}
+
+.image-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 14px; /* Adjust size */
+    /* Limit text lines */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+}
+
+.image-author {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+ /* Placeholder for author image */
+.image-author .author-avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+    background-color: #555; /* Placeholder color */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.image-author .author-avatar i {
+     color: #aaa;
+     font-size: 10px;
+ }
+
+.image-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    opacity: 0; /* Initially hidden */
+     transition: opacity 0.3s;
+}
+.gallery-item:hover .image-actions {
+     opacity: 1; /* Show on hover */
+}
+
+
+.action-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.action-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+ .action-btn a { /* Style for download link */
+     color: inherit;
+     text-decoration: none;
+     display: flex; /* Ensure icon fills the link */
+     align-items: center;
+     justify-content: center;
+ }
+
+/* Large Image Spans */
+.large-span {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.medium-span {
+    grid-row: span 2;
+}
+
+/* Initial Gallery Message */
+.gallery-message {
+    color: #aaa;
+    text-align: center;
+    padding: 40px;
+    grid-column: 1 / -1; /* Span full width */
+}
+.gallery-message button {
+     background-color: #9b59b6;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+
+/* Create Modal (Keep as is) */
+.create-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-content {
+    background-color: #1a1a1a;
+    width: 90%; /* Responsive width */
+    max-width: 600px;
+    border-radius: 10px;
+    padding: 20px;
+    max-height: 90vh; /* Prevent overflow */
+    overflow-y: auto; /* Allow scrolling */
+}
+
+.create-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.create-header h2 {
+    font-size: 18px;
+}
+
+.create-header .close-btn {
+    background: none;
+    border: none;
+    color: #777;
+    font-size: 24px; /* Larger close button */
+    cursor: pointer;
+    padding: 5px; /* Easier to click */
+}
+
+.upload-area {
+    border: 2px dashed #333;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer; /* Indicate clickability */
+    transition: border-color 0.2s;
+}
+.upload-area:hover {
+    border-color: #555;
+}
+
+.upload-area i {
+    font-size: 40px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.upload-text {
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.upload-btn {
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+/* Hide the default file input visually */
+#image-file-input {
+    display: none;
+}
+.uploaded-preview {
+    margin-top: 15px;
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #aaa;
+    font-size: 14px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background-color: #2a2a2a;
+    color: white;
+    font-size: 14px;
+}
+.form-group textarea {
+    resize: vertical; /* Allow vertical resize */
+}
+
+.publish-btn {
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 500;
+    font-size: 16px;
+     margin-top: 10px; /* Add some space */
+}
+/* Add this to your style.css */
+.gallery-item img {
+    /* ... your existing styles ... */
+    display: block; /* Ensure images behave correctly */
+    transition: opacity 0.3s ease-in-out; /* Add fade-in effect */
+    opacity: 1;
+}
+
+.gallery-item img.lazy {
+    opacity: 0.5; /* Make thumbnails slightly transparent initially */
+    /* Or use a background color/image on the gallery-item */
+}
+
+.gallery-item img.lazy.loaded {
+    opacity: 1; /* Fade in full image */
+}
+
+/* Style for the gallery item itself while loading */
+.gallery-item {
+    /* ... existing styles ... */
+    background-color: #2a2a2a; /* Placeholder background */
+    display: flex; /* Helps center error messages if image fails */
+    align-items: center;
+    justify-content: center;
+}

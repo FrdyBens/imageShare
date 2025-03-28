@@ -1,1 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageShare - Local Image Viewer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Link the external CSS file -->
+    <link rel="stylesheet" href="../public/css/style.css">
+    <!-- NO exifr script here - metadata reading is server-side -->
+</head>
+<body>
+    <!-- Hidden file input for the Create modal (still needed) -->
+    <input type="file" id="image-file-input" accept="image/*" style="display: none;">
 
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-image"></i>
+                <span>ImgShare</span>
+            </div>
+            <!-- Removed Load Folder Nav -->
+            <!-- Added Refresh Nav -->
+            <div class="nav-item" id="refresh-gallery-nav">
+                <i class="fas fa-sync-alt"></i>
+                <span>Refresh</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </div>
+            <div class="nav-item" id="create-nav-btn">
+                <i class="fas fa-plus"></i>
+                <span>Create</span>
+            </div>
+            <div class="nav-item active" id="gallery-nav"> <!-- Set gallery active by default -->
+                <i class="fas fa-image"></i>
+                <span>Gallery</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-tools"></i>
+                <span>Tools</span>
+            </div>
+            <div class="profile">
+                 <i class="fas fa-user"></i>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search by title or filename..." id="search-input">
+                </div>
+
+                <div class="category-tags">
+                    <!-- Categories will be loaded dynamically -->
+                    <div class="category active" data-collection="all">All</div>
+                </div>
+
+                <div class="header-buttons">
+                     <!-- Removed Load Folder Header -->
+                     <button id="refresh-gallery-header">Refresh Gallery</button>
+                    <button id="create-btn">Create</button>
+                </div>
+            </div>
+
+            <!-- Gallery -->
+            <div class="gallery">
+                <div class="gallery-grid">
+                    <!-- Initial Message (will be replaced by JS) -->
+                    <div class="gallery-message">
+                        <p>Loading images from server...</p>
+                    </div>
+                    <!-- Gallery items will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Modal (Keep as is) -->
+    <div class="create-modal" id="create-modal">
+        <div class="create-content">
+            <div class="create-header">
+                <h2>Create New Post</h2>
+                <button class="close-btn" id="close-modal">×</button>
+            </div>
+            <div class="upload-area" id="upload-area">
+                 <img src="#" alt="Preview" class="uploaded-preview" style="display: none;">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p class="upload-text">Drag and drop your image here or click to browse</p>
+                <button class="upload-btn" type="button">Browse Files</button>
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" placeholder="Enter a title for your image">
+            </div>
+            <div class="form-group">
+                <label for="description">Description (Optional)</label>
+                <textarea id="description" rows="3" placeholder="Describe your image..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="category">Tags (Optional, comma-separated)</label>
+                <input type="text" id="tags" placeholder="e.g., nature, landscape, sunset">
+            </div>
+            <button class="publish-btn">Publish (Simulated)</button>
+        </div>
+    </div>
+
+    <!-- Link the external JavaScript file -->
+    <script src="../public/js/client.js"></script>
+</body>
+</html>
