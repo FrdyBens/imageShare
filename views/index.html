@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Viewer Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Hidden File Input for Modal -->
+    <input type="file" id="image-file-input" accept="image/*" style="display: none;">
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+             <div class="logo">
+                <i class="fas fa-images"></i> <!-- Changed Icon slightly -->
+                <span>ImgView Pro</span>
+            </div>
+            <div class="nav-item" id="refresh-gallery-nav" title="Refresh Gallery">
+                <i class="fas fa-sync-alt"></i>
+                <span>Refresh</span>
+            </div>
+            <div class="nav-item active" id="gallery-nav" title="View Gallery">
+                <i class="fas fa-image"></i>
+                <span>Gallery</span>
+            </div>
+            <!-- MODIFIED Create Button -->
+            <div class="nav-item" id="create-nav-btn" title="Upload New Image">
+                <i class="fas fa-cloud-upload-alt"></i> <!-- Changed Icon -->
+                <span>Upload</span>
+            </div>
+            <!-- Other placeholders -->
+             <div class="nav-item"> <i class="fas fa-users"></i> <span>Community</span> </div>
+             <div class="nav-item"> <i class="fas fa-tools"></i> <span>Tools</span> </div>
+             <div class="profile"> <i class="fas fa-user"></i> </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="search-bar"> <i class="fas fa-search"></i> <input type="text" placeholder="Search..." id="search-input"> </div>
+                <!-- Category Tags (Collections) -->
+                <div class="category-tags">
+                    <div class="category active" data-collection="all">All</div>
+                    <!-- Collections populated by JS -->
+                </div>
+                <div class="header-buttons">
+                     <button id="refresh-gallery-header"><i class="fas fa-sync-alt"></i> Refresh</button>
+                     <!-- MODIFIED Create Button -->
+                    <button id="create-btn" title="Upload New Image"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
+                </div>
+            </div>
+
+            <!-- Gallery -->
+            <div class="gallery">
+                <div class="gallery-grid">
+                    <div class="gallery-message"> <p><i class="fas fa-spinner fa-spin"></i> Loading images...</p> </div>
+                    <!-- Items injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create/Upload Modal (MODIFIED) -->
+    <div class="create-modal" id="create-modal">
+        <div class="create-content">
+            <div class="create-header">
+                <h2>Upload New Image</h2>
+                <button class="close-btn" id="close-modal">×</button>
+            </div>
+
+            <!-- Upload Area -->
+            <div class="upload-area" id="upload-area">
+                <img src="#" alt="Preview" class="uploaded-preview" style="display: none;">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p class="upload-text">Drag & drop image or click to browse</p>
+                <p id="selected-filename" style="font-size: 12px; margin-top: 5px; color: #ccc;"></p> <!-- Show filename -->
+                <button class="upload-btn" type="button">Browse File</button>
+            </div>
+
+             <!-- Upload Progress/Status -->
+            <div id="upload-status" style="margin-top: 10px; text-align: center;"></div>
+
+            <hr style="border-color: #333; margin: 15px 0;">
+
+            <!-- Collection Selection -->
+             <div class="form-group">
+                <label for="upload-collection">Upload to Collection</label>
+                <select id="upload-collection" name="collection">
+                    <option value="root">Main Directory (root)</option>
+                    <!-- Collections populated by JS -->
+                    <option value="_new_">-- Create New Collection --</option>
+                </select>
+            </div>
+
+            <!-- New Collection Name Input (hidden initially) -->
+            <div class="form-group" id="new-collection-group" style="display: none;">
+                <label for="new-collection-name">New Collection Name</label>
+                <input type="text" id="new-collection-name" name="newCollectionName" placeholder="Enter name for new collection">
+            </div>
+
+
+            <div class="form-group">
+                <label for="title">Title (Optional, uses filename if empty)</label>
+                <input type="text" id="title" name="title" placeholder="Enter image title">
+            </div>
+            <div class="form-group">
+                <label for="description">Description (Optional)</label>
+                <textarea id="description" name="description" rows="2" placeholder="Describe image..."></textarea>
+            </div>
+            <!-- Tags not directly used by backend in this version, but keep for potential future use -->
+            <!-- <div class="form-group">
+                <label for="tags">Tags (Optional)</label>
+                <input type="text" id="tags" name="tags" placeholder="e.g., nature, sunset">
+            </div> -->
+
+            <!-- Changed Button Text -->
+            <button class="publish-btn" id="upload-submit-btn"><i class="fas fa-upload"></i> Upload Image</button>
+        </div>
+    </div>
+
+    <script src="/js/client.js"></script>
+</body>
+</html>
